@@ -355,7 +355,7 @@ export default function HomePage() {
     // Auto-refresh every 60 seconds
     const interval = setInterval(fetchTokens, 60000);
     return () => clearInterval(interval);
-  }, [filters, fetchTokens]);
+  }, [filters]);
 
   const formatNumber = (num: number, decimals: number = 2): string => {
     if (num >= 1e9) return `$${(num / 1e9).toFixed(decimals)}B`;
@@ -410,49 +410,31 @@ export default function HomePage() {
       {/* Cosmic Grid Overlay */}
       <div className="cosmic-grid"></div>
       
-      {/* Floating Orbs with Images */}
+      {/* Floating Orbs with Images - Reduced count */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {[
           '/Logo.jpg',
           '/memepower.png', 
           '/memerrich.jpeg',
-          '/chargig pic .jpeg',
           '/coin1.png',
-          '/coin2.png',
-          '/Gy_BbJjXgAAWJFy.jpeg',
-          '/Gy_Bh1JW8AEzF9o.jpeg',
-          '/Gy_Bm6UXAAAqi09.jpeg',
-          '/Gy-_eIUXwAAXyMr.jpeg',
-          '/Gy6MixDXYAAz2-S.jpeg',
-          '/Gy6ObjrW8AA66__.jpeg',
-          '/GzDtYgDXsAA0pYj.jpeg',
-          '/GzDuh6-WwAAy2Zt.jpeg',
-          '/GzDuvi_WcAAutY5.jpeg',
-          '/GzDwOi-XkAEC9G9.jpeg',
-          '/GzJf3PhXAAA0B2X.jpeg',
-          '/GzJgFLXWEAATZT6.jpeg',
-          '/GzJkLRFWcAAs9ap.jpeg',
-          '/GzO_n6IWIAEg9_V.jpeg',
-          '/GzPAsBZWkAA_M1t.jpeg',
-          '/GzPAyH4WcAAZW2A.jpeg',
-          '/GzPAzaDW0AALXgX.jpeg'
+          '/coin2.png'
         ].map((imageSrc, i) => (
           <div
             key={i}
             className="floating-orb"
             style={{
-              left: `${5 + (i * 8) % 90}%`,
-              top: `${10 + (i * 12) % 80}%`,
-              width: `${60 + (i * 10)}px`,
-              height: `${60 + (i * 10)}px`,
-              animationDelay: `${i * 1.5}s`,
-              animationDuration: `${10 + (i * 1.5)}s`
+              left: `${10 + (i * 20) % 80}%`,
+              top: `${15 + (i * 15) % 70}%`,
+              width: `${80 + (i * 15)}px`,
+              height: `${80 + (i * 15)}px`,
+              animationDelay: `${i * 3}s`,
+              animationDuration: `${15 + (i * 2)}s`
             }}
           >
             <img 
               src={imageSrc} 
               alt=""
-              className="w-full h-full object-cover rounded-full opacity-50"
+              className="w-full h-full object-cover rounded-full opacity-30"
               onError={(e) => {
                 console.log(`Failed to load image: ${imageSrc}`);
                 e.currentTarget.style.display = 'none';
@@ -468,38 +450,36 @@ export default function HomePage() {
         <div className="energy-wave" style={{ animationDelay: '10s', animationDirection: 'reverse' }}></div>
       </div>
       
-      {/* Animated Particles */}
+      {/* Animated Particles - Reduced count */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
             className="particle"
             style={{
-              left: `${5 + (i * 8) % 90}%`,
-              width: `${4 + (i % 3) * 2}px`,
-              height: `${4 + (i % 3) * 2}px`,
-              background: i % 3 === 0 
-                ? 'radial-gradient(circle, rgba(251, 191, 36, 0.8) 0%, transparent 70%)'
-                : i % 3 === 1
-                ? 'radial-gradient(circle, rgba(147, 51, 234, 0.8) 0%, transparent 70%)'
-                : 'radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, transparent 70%)',
-              animationDelay: `${i * 1.2}s`,
-              animationDuration: `${15 + (i % 4) * 3}s`
+              left: `${10 + (i * 15) % 80}%`,
+              width: `${4 + (i % 2) * 2}px`,
+              height: `${4 + (i % 2) * 2}px`,
+              background: i % 2 === 0 
+                ? 'radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, transparent 70%)'
+                : 'radial-gradient(circle, rgba(147, 51, 234, 0.4) 0%, transparent 70%)',
+              animationDelay: `${i * 2}s`,
+              animationDuration: `${20 + (i % 2) * 5}s`
             }}
           />
         ))}
       </div>
       
-      {/* Shooting Stars */}
+      {/* Shooting Stars - Reduced count */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <div
             key={i}
             className="shooting-star"
             style={{
-              top: `${10 + (i * 15) % 60}%`,
-              animationDelay: `${i * 5}s`,
-              animationDuration: `${3 + (i % 2)}s`
+              top: `${20 + (i * 20) % 60}%`,
+              animationDelay: `${i * 8}s`,
+              animationDuration: `${4 + (i % 2)}s`
             }}
           />
         ))}
