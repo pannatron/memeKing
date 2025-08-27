@@ -165,6 +165,7 @@ function filterOldRunners(pairs: DS_Pair[], opts = {
 }
 
 // ===== API Handler =====
+export const runtime = 'edge';
 export const revalidate = 30;
 
 export async function GET(req: Request) {
