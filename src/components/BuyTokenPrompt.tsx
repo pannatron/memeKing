@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { ShoppingCart, ExternalLink, Coins, Lock } from 'lucide-react';
+import { ShoppingCart, ExternalLink, Lock } from 'lucide-react';
 
 interface BuyTokenPromptProps {
   isVisible: boolean;
@@ -11,8 +11,7 @@ interface BuyTokenPromptProps {
 
 export const BuyTokenPrompt: React.FC<BuyTokenPromptProps> = ({ 
   isVisible, 
-  connected, 
-  minimumRequired 
+  connected 
 }) => {
   // DexScreener link for buying tokens
   const buyTokenLink = "https://dexscreener.com/solana/2kv6hkaaij9vc7xhl8pfzxelcfekjw9o8zx3xl155gm3";

@@ -42,7 +42,7 @@ export default function MemeKingChargingAnimation({
 
       // Animation frame cycling
       const frameInterval = setInterval(() => {
-        setCurrentFrame(prev => {
+        setCurrentFrame(() => {
           if (progress < 25) return 1; // วิ่ง
           if (progress < 50) return 2; // วิ่งต่อ
           if (progress < 75) return 3; // ล่ื่นล้ม

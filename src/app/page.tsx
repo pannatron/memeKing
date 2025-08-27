@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Clock, TrendingUp, TrendingDown, RefreshCw, Filter, DollarSign, ExternalLink, Calendar, Zap, Flame, Crown, Eye, Sparkles, Star, Rocket, Play, Pause, Lock, ShoppingCart } from 'lucide-react';
+import { Clock, TrendingUp, RefreshCw, Filter, DollarSign, ExternalLink, Calendar, Zap, Flame, Crown, Eye, Sparkles, Star, Rocket, Lock, ShoppingCart } from 'lucide-react';
 import MemeKingChargingAnimation from '../components/MemeKingChargingAnimation';
 import { WalletConnection } from '../components/WalletConnection';
-import { BuyTokenPrompt } from '../components/BuyTokenPrompt';
 
 interface OldRunnerToken {
   chainId: string;
@@ -290,7 +289,7 @@ export default function HomePage() {
   });
   const [showFilters, setShowFilters] = useState(false);
   const [selectedChain, setSelectedChain] = useState<string>('all');
-  const [meta, setMeta] = useState<ApiResponse['meta'] | null>(null);
+  const [, setMeta] = useState<ApiResponse['meta'] | null>(null);
   const [summary, setSummary] = useState<ApiResponse['summary'] | null>(null);
 
   const handleAccessChange = (hasAccess: boolean) => {
@@ -356,7 +355,7 @@ export default function HomePage() {
     // Auto-refresh every 60 seconds
     const interval = setInterval(fetchTokens, 60000);
     return () => clearInterval(interval);
-  }, [filters]);
+  }, [filters, fetchTokens]);
 
   const formatNumber = (num: number, decimals: number = 2): string => {
     if (num >= 1e9) return `$${(num / 1e9).toFixed(decimals)}B`;

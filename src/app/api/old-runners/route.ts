@@ -22,7 +22,7 @@ type DS_Pair = {
 };
 
 // ===== Utils =====
-const nz = (x: any, d = 0) => (typeof x === "number" && isFinite(x) ? x : d);
+const nz = (x: unknown, d = 0) => (typeof x === "number" && isFinite(x) ? x : d);
 
 async function fetchJSON(url: string, init?: RequestInit) {
   const res = await fetch(url, { ...init, next: { revalidate: TTL } });
@@ -165,7 +165,7 @@ function filterOldRunners(pairs: DS_Pair[], opts = {
 }
 
 // ===== API Handler =====
-export const revalidate = TTL;
+export const revalidate = 30;
 
 export async function GET(req: Request) {
   const u = new URL(req.url);
@@ -182,7 +182,29 @@ export async function GET(req: Request) {
   const networksParam = (u.searchParams.get("networks") ?? "").trim();
   const networks = (networksParam ? networksParam.split(",") : NETWORKS).map(s => s.trim());
 
-  const outPerChain: Record<string, any[]> = {};
+  const outPerChain: Record<string, Array<{
+    chainId: string;
+    pairAddress: string;
+    token: { address: string; name: string; symbol: string };
+    quote: string;
+    priceUsd: number;
+    lp: number;
+    vol5m: number;
+    vol1h: number;
+    vol24h: number;
+    trades1h: number;
+    ageMin: number;
+    ageDays: number;
+    dVolPct: number;
+    priceChange: { m5?: number; h1?: number; h6?: number; h24?: number } | undefined;
+    priceChangeH1: number;
+    priceChangeM5: number;
+    buySkew5m: number;
+    fdv: number | null;
+    dexId: string | null;
+    score: number;
+    links: { dexscreener: string };
+  }>> = {};
   
   for (const chain of networks) {
     try {
@@ -234,14 +256,14 @@ export async function GET(req: Request) {
       }));
       
       outPerChain[chain] = results.sort((a, b) => b.score - a.score);
-    } catch (e: any) {
-      console.error(`Error processing ${chain}:`, e.message);
+    } catch (e: unknown) {
+      console.error(`Error processing ${chain}:`, e instanceof Error ? e.message : String(e));
       outPerChain[chain] = [];
     }
   }
 
   // รวมทุกเชนแล้ว sort อีกที
-  const combined = Object.values(outPerChain).flat().sort((a: any, b: any) => b.score - a.score);
+  const combined = Object.values(outPerChain).flat().sort((a, b) => b.score - a.score);
 
   return NextResponse.json({
     meta: { 

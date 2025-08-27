@@ -88,7 +88,7 @@ export const useTokenBalance = () => {
 
     useEffect(() => {
         checkTokenBalance();
-    }, [publicKey, connected, connection]);
+    }, [publicKey, connected, connection, checkTokenBalance]);
 
     return {
         balance,

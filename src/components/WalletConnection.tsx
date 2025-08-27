@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton, WalletDisconnectButton } from '@solana/wallet-adapter-react-ui';
 import { useTokenBalance } from '../hooks/useTokenBalance';
-import { Wallet, Lock, Unlock, Coins, RefreshCw, CheckCircle, XCircle, ExternalLink, ShoppingCart } from 'lucide-react';
+import { Lock, RefreshCw, CheckCircle } from 'lucide-react';
 
 interface WalletConnectionProps {
     onAccessGranted?: (hasAccess: boolean) => void;
@@ -12,7 +12,7 @@ interface WalletConnectionProps {
 
 export const WalletConnection: React.FC<WalletConnectionProps> = ({ onAccessGranted }) => {
     const { connected, publicKey } = useWallet();
-    const { balance, loading, hasMinimumBalance, minimumRequired, tokenAddress, refetch } = useTokenBalance();
+    const { balance, loading, hasMinimumBalance, refetch } = useTokenBalance();
 
     React.useEffect(() => {
         if (onAccessGranted) {
